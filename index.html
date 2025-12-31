@@ -14,22 +14,26 @@
 
     <div id="map"></div>
 
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="건물 이름 (예: 2공)" onkeypress="handleEnter(event)">
+        <button onclick="searchBuilding()">검색</button>
+    </div>
+
     <div id="modal" class="hidden">
         <div class="modal-content">
             
-            <button class="close-btn" onclick="closeModal()">X 닫기</button>
-            
             <h2 id="modal-title">건물 이름</h2>
             
-            <div id="floor-nav">
-                </div>
+            <div id="floor-nav"></div>
 
             <div class="image-container">
                 <img id="floor-image" src="" alt="설계도">
             </div>
+
+            <button class="close-btn" onclick="closeModal()">X 닫기</button>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
