@@ -395,25 +395,11 @@ document.querySelector('.modal-overlay').addEventListener('click', closeModal);
 map.on('click', function(e) {
     console.log("[" + e.latlng.lat.toFixed(6) + ", " + e.latlng.lng.toFixed(6) + "],");
 });
-
-/* [정밀 좌표 추출 도구]
-let tempPoints = [];
-let tempPolygon = L.polygon([], {color: 'red'}).addTo(map);
-
+/* 좌표추출도구
 map.on('click', function(e) {
-    const lat = e.latlng.lat.toFixed(6);
-    const lng = e.latlng.lng.toFixed(6);
+    var lat = e.latlng.lat.toFixed(6); // 위도 (소수점 6자리)
+    var lng = e.latlng.lng.toFixed(6); // 경도 (소수점 6자리)
     
-    tempPoints.push([lat, lng]); // 점 추가
-    tempPolygon.setLatLngs(tempPoints); // 실시간으로 폴리곤 그리기
-    
-    // 콘솔에 현재까지 찍은 모든 좌표 배열 출력
-    console.log("현재 영역 좌표: " + JSON.stringify(tempPoints));
-});
-
-더블 클릭하면 현재까지 찍은 좌표 초기화
-map.on('dblclick', function() {
-    tempPoints = [];
-    tempPolygon.setLatLngs([]);
-    console.log("좌표 초기화됨");
-});*/   
+    // 1. 브라우저 콘솔(F12)에 [위도, 경도] 형식으로 출력
+    console.log("[" + lat + ", " + lng + "],");
+});*/
