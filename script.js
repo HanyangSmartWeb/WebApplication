@@ -15,6 +15,31 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // --------------------------------------------------------
 // 데이터 정의 (건물 정보)
 const buildings = {
+
+    "eng": {
+        name: "학연산클러스터지원센터",
+        floors: {
+            "B1": "images/eng_0f.png",
+            "1": "images/eng_1f.png",
+            "2": "images/eng_2f.png",
+            "3": "images/eng_3f.png",
+            "4": "images/eng_4f.png",
+            "5": "images/eng_5f.png",
+            "6": "images/eng_6f.png"
+        }
+    },
+
+    "eng1":{
+        name: "제 1공학관",
+        floors: {
+            "1": "images/eng1_1f.png",
+            "2": "images/eng1_2f.png",
+            "3": "images/eng1_3f.png",
+            "4": "images/eng1_4f.png",
+            "5": "images/eng1_5f.png"
+        }
+    },
+
     "eng2": {
         name: "제2공학관",
         floors: {
@@ -24,21 +49,122 @@ const buildings = {
             "4": "images/eng2_4f.png",
             "5": "images/eng2_5f.png"
         }
-    }
-    // 여기에 건물 계속 추가 가능
+    },
+
+    "eng3": {
+        name: "제3공학관",
+        floors: {
+            "B1": "images/eng3_0f.png",
+            "1": "images/eng3_1f.png",
+            "2": "images/eng3_2f.png",
+            "3": "images/eng3_3f.png",
+            "4": "images/eng3_4f.png",
+            "5": "images/eng3_5f.png"
+        }
+    },
+
+    "eng4": {
+        name: "제4공학관",
+        floors: {
+            "B1": "images/eng4_0f.png",
+            "1": "images/eng4_1f.png",
+            "2": "images/eng4_2f.png",
+            "3": "images/eng4_3f.png",
+            "4": "images/eng4_4f.png",
+            "5": "images/eng4_5f.png"
+        }
+    },
+
+    "eng5": {
+        name: "제5공학관",
+        floors: {
+            "B1": "images/eng5_0f.png",
+            "1": "images/eng5_1f.png",
+            "2": "images/eng5_2f.png",
+            "3": "images/eng5_3f.png",
+            "4": "images/eng5_4f.png",
+            "5": "images/eng5_5f.png"
+        }
+    },
+
+
+    
 };
 
 var mapLayers = {}; 
 var searchMarker = null;
 var myLocationMarker = null;
 
-// --------------------------------------------------------
-// 제2공학관 투명 영역 그리기 (클릭 가능 영역)
+var engPolygon = L.polygon([
+    ["37.296625","126.838591"],
+    ["37.296048","126.838958"],
+    ["37.296123","126.839151"],
+    ["37.296704","126.838784"]
+], {
+    color: 'transparent', 
+    fillColor: '#0E4D9C', // 한양대 블루
+    fillOpacity: 0
+}).addTo(map);
+
+mapLayers["eng"] = engPolygon;
+
+// 마우스 호버 효과
+engPolygon.on('mouseover', function() { 
+    this.setStyle({ color: '#0E4D9C', fillOpacity: 0.3 }); 
+});
+engPolygon.on('mouseout', function() { 
+    this.setStyle({ color: 'transparent', fillOpacity: 0 }); 
+});
+
+// 클릭 시 모달 열기
+engPolygon.on('click', function() { openModal("eng"); });
+
+var eng1Polygon = L.polygon([
+    ["37.297723","126.836643"],
+    ["37.297979","126.837236"],
+    ["37.297888","126.837298"],
+    ["37.297930","126.837418"],
+    ["37.297331","126.837837"],
+    ["37.296902","126.836879"],
+    ["37.297209","126.836670"],
+    ["37.297320","126.836847"],
+    ["37.297282","126.836871"],
+    ["37.297452","126.837265"],
+    ["37.297713","126.837097"],
+    ["37.297548","126.836759"]
+], {
+    color: 'transparent', 
+    fillColor: '#0E4D9C', // 한양대 블루
+    fillOpacity: 0
+}).addTo(map);
+
+mapLayers["eng1"] = eng1Polygon;
+
+// 마우스 호버 효과
+eng1Polygon.on('mouseover', function() { 
+    this.setStyle({ color: '#0E4D9C', fillOpacity: 0.3 }); 
+});
+eng1Polygon.on('mouseout', function() { 
+    this.setStyle({ color: 'transparent', fillOpacity: 0 }); 
+});
+
+// 클릭 시 모달 열기
+eng1Polygon.on('click', function() { openModal("eng1"); });
+
+
 var eng2Polygon = L.polygon([
-    [37.296582, 126.832907], 
-    [37.296832, 126.833307], 
-    [37.297339, 126.832974], 
-    [37.297245, 126.832486]  
+    ["37.297235","126.832491"],
+    ["37.297395","126.832896"],
+    ["37.297318","126.832947"],
+    ["37.297329","126.832979"],
+    ["37.296825","126.833317"],
+    ["37.296776","126.833213"],
+    ["37.296718","126.833248"],
+    ["37.296584","126.832918"],
+    ["37.296802","126.832778"],
+    ["37.296906","126.833025"],
+    ["37.297179","126.832848"],
+    ["37.297056","126.832601"]  
 ], {
     color: 'transparent', 
     fillColor: '#0E4D9C', // 한양대 블루
@@ -57,6 +183,92 @@ eng2Polygon.on('mouseout', function() {
 
 // 클릭 시 모달 열기
 eng2Polygon.on('click', function() { openModal("eng2"); });
+
+var eng3Polygon = L.polygon([
+    ["37.297403","126.835847"],
+    ["37.297231","126.835965"],
+    ["37.297499","126.836608"],
+    ["37.297670","126.836498"]
+], {
+    color: 'transparent', 
+    fillColor: '#0E4D9C', // 한양대 블루
+    fillOpacity: 0
+}).addTo(map);
+
+mapLayers["eng3"] = eng3Polygon;
+
+// 마우스 호버 효과
+eng3Polygon.on('mouseover', function() { 
+    this.setStyle({ color: '#0E4D9C', fillOpacity: 0.3 }); 
+});
+eng3Polygon.on('mouseout', function() { 
+    this.setStyle({ color: 'transparent', fillOpacity: 0 }); 
+});
+
+// 클릭 시 모달 열기
+eng3Polygon.on('click', function() { openModal("eng3"); });
+
+var eng4Polygon = L.polygon([
+    ["37.297169","126.835922"],
+    ["37.296543","126.836348"],
+    ["37.296573","126.836421"],
+    ["37.296511","126.836480"],
+    ["37.296526","126.836528"],
+    ["37.296599","126.836485"],
+    ["37.296635","126.836568"],
+    ["37.297051","126.836276"],
+    ["37.297041","126.836187"],
+    ["37.297213","126.836050"]
+], {
+    color: 'transparent', 
+    fillColor: '#0E4D9C', // 한양대 블루
+    fillOpacity: 0
+}).addTo(map);
+
+mapLayers["eng4"] = eng4Polygon;
+
+// 마우스 호버 효과
+eng4Polygon.on('mouseover', function() { 
+    this.setStyle({ color: '#0E4D9C', fillOpacity: 0.3 }); 
+});
+eng4Polygon.on('mouseout', function() { 
+    this.setStyle({ color: 'transparent', fillOpacity: 0 }); 
+});
+
+// 클릭 시 모달 열기
+eng4Polygon.on('click', function() { openModal("eng4"); });
+
+var eng5Polygon = L.polygon([
+    ["37.296859","126.836839"],
+    ["37.297226","126.837692"],
+    ["37.296900","126.837907"],
+    ["37.296492","126.836965"],
+    ["37.296533","126.836933"],
+    ["37.296543","126.836863"],
+    ["37.296590","126.836828"],
+    ["37.296693","126.836839"],
+    ["37.296731","126.836783"],
+    ["37.296797","126.836783"],
+    ["37.296844","126.836847"]
+], {
+    color: 'transparent', 
+    fillColor: '#0E4D9C', // 한양대 블루
+    fillOpacity: 0
+}).addTo(map);
+
+mapLayers["eng5"] = eng5Polygon;
+
+// 마우스 호버 효과
+eng5Polygon.on('mouseover', function() { 
+    this.setStyle({ color: '#0E4D9C', fillOpacity: 0.3 }); 
+});
+eng5Polygon.on('mouseout', function() { 
+    this.setStyle({ color: 'transparent', fillOpacity: 0 }); 
+});
+
+// 클릭 시 모달 열기
+eng5Polygon.on('click', function() { openModal("eng5"); });
+
 
 
 // --------------------------------------------------------
@@ -140,11 +352,19 @@ function openModal(id) {
     
     document.getElementById('modal-title').innerText = data.name;
     nav.innerHTML = "";
+
+     // 층 정렬
+    var floors = Object.keys(data.floors).sort(function(a, b) {
+        // B1을 -1로 처리하여 가장 앞으로
+        var aNum = a === "B1" ? -1 : parseInt(a);
+        var bNum = b === "B1" ? -1 : parseInt(b);
+        return aNum - bNum;
+    });
     
     // 층 버튼 생성
-    Object.keys(data.floors).forEach(function(floor) {
+    floors.forEach(function(floor) {
         var btn = document.createElement('button');
-        btn.innerText = floor + "F";
+        btn.innerText = floor.startsWith("B") ? floor : floor + "F";
         btn.className = "floor-btn";
         btn.onclick = function() { changeFloor(id, floor, btn); };
         nav.appendChild(btn);
@@ -171,3 +391,29 @@ function closeModal() {
 
 // 모달 배경 클릭 시 닫기 기능 추가
 document.querySelector('.modal-overlay').addEventListener('click', closeModal);
+
+map.on('click', function(e) {
+    console.log("[" + e.latlng.lat.toFixed(6) + ", " + e.latlng.lng.toFixed(6) + "],");
+});
+
+/* [정밀 좌표 추출 도구]
+let tempPoints = [];
+let tempPolygon = L.polygon([], {color: 'red'}).addTo(map);
+
+map.on('click', function(e) {
+    const lat = e.latlng.lat.toFixed(6);
+    const lng = e.latlng.lng.toFixed(6);
+    
+    tempPoints.push([lat, lng]); // 점 추가
+    tempPolygon.setLatLngs(tempPoints); // 실시간으로 폴리곤 그리기
+    
+    // 콘솔에 현재까지 찍은 모든 좌표 배열 출력
+    console.log("현재 영역 좌표: " + JSON.stringify(tempPoints));
+});
+
+더블 클릭하면 현재까지 찍은 좌표 초기화
+map.on('dblclick', function() {
+    tempPoints = [];
+    tempPolygon.setLatLngs([]);
+    console.log("좌표 초기화됨");
+});*/   
